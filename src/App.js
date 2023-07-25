@@ -16,29 +16,6 @@ class App extends Component {
     };
   }
 
-  // dummyVehicleData = [
-  //   { "name": "air1","planeno":"48576", "path": "bangloretokolkata"},
-  //   { "name": "air2","planeno":"57638", "path": "kolkatatobanglore"},
-  //   { "name": "air3","planeno":"96477", "path": "chennaitohyderabad"},
-  //   { "name": "air4","planeno":"58395", "path": "hyderabadtochennai"},
-  //   { "name": "air5","planeno":"60737", "path": "chennaitodelhi"},
-  //   { "name": "air6","planeno":"20565", "path": "delhitochennai"},
-  //   { "name": "air7","planeno":"39465", "path": "hyderabadtobanglore"},
-  //   { "name": "air8","planeno":"73538", "path": "bangloretohyderabad"},
-  //   { "name": "air9","planeno":"19474", "path": "delhitokolkata"},
-  //   { "name": "air10","planeno":"87638", "path": "kolkatatodelhi"},
-  //   { "name": "air11", "planeno": "48486", "path": "hyderabadtomumbai" },
-  //   { "name": "air12", "planeno": "57838", "path": "mumbaitohyderabad" },
-  //   { "name": "air13", "planeno": "96877", "path": "chennaitomumbai" },
-  //   { "name": "air14", "planeno": "58495", "path": "mumbaitochennai" },
-  //   { "name": "air15", "planeno": "60037", "path": "kolkatatomumbai" },
-  //   { "name": "air16", "planeno": "20365", "path": "mumbaitokolkata" },
-  //   { "name": "air17", "planeno": "35765", "path": "delhitohyderabad" },
-  //   { "name": "air18", "planeno": "79738", "path": "hyderabadtodelhi" },
-  //   { "name": "air19", "planeno": "19474", "path": "kolkatatohyderabad" },
-  //   { "name": "air20", "planeno": "87629", "path": "hyderabadtokolkata" },
-  // ];
-
 
   componentDidMount() {
     const apiUrl = 'http://localhost:3000/dummyvehicledata'; // Replace this with your API endpoint URL
