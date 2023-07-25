@@ -9,7 +9,7 @@ class App extends Component {
       pointB: "",
       selectedDate: "",
       vehicles: [],
-      errMsg:"",
+      errMsg: false,
       startInput: false,
       dropInput:false,
       vehicledata: {}
@@ -17,8 +17,9 @@ class App extends Component {
   }
 
 
+
   componentDidMount() {
-    const apiUrl = 'http://localhost:3000/dummyvehicledata'; // Replace this with your API endpoint URL
+    const apiUrl = 'https://mocki.io/v1/df24a915-b0df-4bed-a087-79349ffb227d';
 
     fetch(apiUrl)
       .then((response) => {
@@ -30,17 +31,15 @@ class App extends Component {
       .then((data) => {
         console.log('API data:', data);
         this.setState({vehicledata: data})
-        // Handle the API response data here
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
-        // Handle any errors that occurred during the API call
       });
   }
 
 
   handleSearch = () => {
-    const {pointA,pointB,vehicledata} = this.state
+    const {pointA,pointB,vehicledata,selectedDate} = this.state
     if (pointA === "") {
       this.setState({ startInput: true });
     } else {
@@ -53,13 +52,28 @@ class App extends Component {
     }
     if (vehicledata) {
       const presentpath = `${pointA.toLowerCase()}to${pointB.toLowerCase()}`;
-      const filtered = vehicledata.filter(
+      const filtered = vehicledata.dummyvehicledata.filter(
         (each) => each.path === presentpath
       );
       const errMsg = filtered.length === 0;
-      this.setState({ vehicles: filtered, errMsg });
+      if (errMsg) {
+        this.setState({ errMsg });
+      } else {
+        const originalFiltered = filtered
+        this.checkDate(selectedDate,originalFiltered)
+      }
     }
+
   };
+
+  checkDate(selectedDate,list) {
+    const dateObject = new Date(selectedDate);
+    const dateInteger = dateObject.getDate();
+    const isIncluded = list.filter((eachObject) => eachObject.dates.includes(dateInteger))
+    if (isIncluded.length > 0) {
+      this.setState({vehicles:isIncluded})
+    }
+  }
 
   render() {
     const { pointA, pointB, selectedDate, vehicles,errMsg,startInput,dropInput } = this.state;
@@ -101,7 +115,7 @@ class App extends Component {
           <h2>Available Planes:</h2>
           {errMsg? <p>No Planes available</p>: (<ul>
             {vehicles.map((vehicle) => (
-              <li key={vehicle.name}>{`Name: ${vehicle.name}/Plane Number: ${vehicle.planeno}`}</li>
+              <li key={vehicle.name}>{`Name: ${vehicle.name}/PlaneNumber: ${vehicle.planeno}/Date: ${selectedDate}`}</li>
             ))}
           </ul>)}
         </div>
